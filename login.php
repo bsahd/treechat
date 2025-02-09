@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ツリーチャット:ログイン</title>
+    <style><?php include("style.css")?></style>
 </head>
 
 <body>
@@ -13,13 +14,13 @@
         <div>
             <label>
                 ユーザー名
-                <input type="text" name="name" required>
+                <input type="text" name="name" required autocomplete="off">
             </label>
         </div>
         <div>
             <label>
                 パスワード
-                <input type="password" name="pass">
+                <input type="password" name="pass" autocomplete="off">
             </label>
         </div>
         <input type="submit" value="ログイン">

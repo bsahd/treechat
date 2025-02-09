@@ -15,6 +15,7 @@ if ($_POST["text"] == "") {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>ツリーチャット:エラー</title>
+        <style><?php include("style.css")?></style>
     </head>
 
     <body>
@@ -33,12 +34,11 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
     $tree = json_decode(fread($fp, filesize("chat.json")), TRUE);
     fseek($fp, 0);
     ftruncate($fp, 0);      // ファイルを切り詰めます
-    date_default_timezone_set("Asia/Tokyo");
     $post = [
         "id" => uniqid("", true),
         "parent" => $_POST["parent"],
         "text" => $_POST["text"],
-        "date" => date("Y/m/d H:i:s") . "(JST)",
+        "unixtime" => time(),
         "name" => $_SESSION["name"]
     ];
     array_push($tree, $post);
