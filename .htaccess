@@ -1,0 +1,6 @@
+<Files ~ "^chat\.json$">
+  deny from all 
+</Files>
+<Files ~ "^users.json$">
+    deny from all 
+</Files>
