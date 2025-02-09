@@ -55,13 +55,13 @@ if (!array_key_exists("name", $_SESSION)) {
                 } else {
                     var v = date2str(new Date());
                     updateStatus.innerText = "✅" + v + ": 更新なし"
-                    setTimeout(checkUpdate, 4000);
+                    setTimeout(checkUpdate, 500);
                 }
             }catch{
                 updateStatus.innerText = "⛔エラー"
             }
         }
-        setTimeout(checkUpdate, 2000);
+        setTimeout(checkUpdate, 500);
     </script>
     <?php
     function generateHTML($root)
