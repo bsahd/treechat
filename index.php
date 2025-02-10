@@ -28,7 +28,7 @@ if (!array_key_exists("name", $_SESSION)) {
 
 <body>
     <h1>ツリーチャット</h1>
-    <p><?= $_SESSION["name"] ?> としてログインしています <a href="logout.php">ログアウト</a></p>
+    <p><?= $_SESSION["name"] ?> としてログインしています <a href="logout.php">ログアウト</a><a href="passwd.php">パスワード変更</a></p>
     <p id="updateStatus"><?= $nowtime ?>時点の情報です</p>
     <script>
         function date2str(d) {
