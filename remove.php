@@ -1,5 +1,6 @@
 <?php
 session_start(['read_and_close' => 1]);
+$style = $_POST["style"] ?? "";
 if (!array_key_exists("name", $_SESSION)) {
 ?>
     not logined
@@ -18,7 +19,7 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
     ?>
         post not found
         <?php
-        if ($_POST["style"] == "dialog"){
+        if ($style == "dialog"){
             ?><button type="button" onclick="window.parent.postMessage('closedialog', '*');">close</button><?php
         }else{
             ?><a href="./">戻る</a><?php
@@ -32,7 +33,7 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
     ?>
         ユーザーが違うため、削除できません
         <?php
-        if ($_POST["style"] == "dialog"){
+        if ($style == "dialog"){
             ?><button type="button" onclick="window.parent.postMessage('closedialog', '*');">close</button><?php
         }else{
             ?><a href="./">戻る</a><?php
@@ -49,7 +50,7 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
     ?>
         小要素があるため、削除できません
         <?php
-        if ($_POST["style"] == "dialog"){
+        if ($style == "dialog"){
             ?><button type="button" onclick="window.parent.postMessage('closedialog', '*');">close</button><?php
         }else{
             ?><a href="./">戻る</a><?php
@@ -62,7 +63,7 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
     ftruncate($fp, 0);      // ファイルを切り詰めます
     fwrite($fp, json_encode($tree, JSON_UNESCAPED_UNICODE));
     fflush($fp);            // 出力をフラッシュしてからロックを解放します
-    if($_POST["style"] == "dialog"){
+    if($style == "dialog"){
         ?>完了<script>window.parent.postMessage('reload', '*');</script><?php
     }else{
         header("Location: ./");

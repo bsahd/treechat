@@ -51,6 +51,8 @@ if (!array_key_exists("name", $_SESSION)) {
                 var a = await (await fetch("chathash.php")).text()
                 if (CHAT_HASH != a) {
                     updateStatus.innerText = "更新があります"
+                    document.getElementsByName("formsend")[0].src = "data:text/plain,Loading..."
+                    document.getElementById("fsenddialog").showModal();
                     location.reload()
                 } else {
                     var v = date2str(new Date());
