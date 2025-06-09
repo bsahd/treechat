@@ -23,7 +23,7 @@ if (!array_key_exists("name", $_SESSION)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ツリーチャット</title>
-    <style><?php include("style.css")?></style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -31,62 +31,12 @@ if (!array_key_exists("name", $_SESSION)) {
     <p><?= $_SESSION["name"] ?> としてログインしています <a href="logout.php">ログアウト</a> <a href="passwd.php">パスワード変更</a></p>
     <p id="updateStatus"><?= $nowtime ?>時点の情報です</p>
     <script>
-        function date2str(d) {
-            return d.toLocaleString("ja", {
-                "hour12": false,
-                "year": "numeric",
-                "month": "2-digit",
-                "day": "2-digit",
-                "hour": "2-digit",
-                "minute": "2-digit",
-                "second": "2-digit",
-                "timeZoneName": "short"
-            });
-        }
         var CHAT_HASH = "<?= hash("sha256", $treetext) ?>"
-        var updateStatus = document.getElementById("updateStatus")
-        updateStatus.innerText = date2str(new Date(<?= $_SERVER['REQUEST_TIME'] * 1000 ?>)) + "時点の情報です";
-        async function checkUpdate() {
-            try {
-                var a = await (await fetch("chathash.php")).text()
-                if (CHAT_HASH != a) {
-                    updateStatus.innerText = "更新があります"
-                    document.getElementsByName("formsend")[0].src = "data:text/plain,Loading..."
-                    document.getElementById("fsenddialog").showModal();
-                    location.reload()
-                } else {
-                    var v = date2str(new Date());
-                    updateStatus.innerText = "✅" + v + ": 更新なし"
-                    setTimeout(checkUpdate, 2000);
-                }
-            }catch{
-                updateStatus.innerText = "⛔エラー"
-            }
-        }
-        setTimeout(checkUpdate, 2000);
-        window.addEventListener("load",()=>{
-            document.querySelectorAll("form").forEach(el=>{
-                el.target="formsend"
-                el.onsubmit=()=>{
-                    document.getElementsByName("formsend")[0].src = "data:text/plain,Loading..."
-                    console.log("submit");
-                    document.getElementById("fsenddialog").showModal();
-                }
-                const hiddenv = document.createElement("input");
-                hiddenv.type="hidden";
-                hiddenv.name="style";
-                hiddenv.value="dialog";
-                el.append(hiddenv);
-            })
-            window.addEventListener("message", (response) => {
-                if(response.data == "closedialog"){
-                    document.getElementById("fsenddialog").close();
-                }else if(response.data == "reload"){
-                    location.reload();
-                }
-            })
-        })
     </script>
+    <script src="index.js"></script>
+    <dialog id="fsenddialog"><iframe src="data:text/plain,Loading..." frameborder="0" name="formsend" style="margin:-8px;"></iframe><form method="dialog">
+    <button>閉じる</button>
+    </form></dialog>
     <?php
     function generateHTML($root)
     {
@@ -131,9 +81,6 @@ if (!array_key_exists("name", $_SESSION)) {
     }
     generateHTML("root")
     ?>
-    <dialog id="fsenddialog"><iframe src="data:text/plain,Loading..." frameborder="0" name="formsend" style="margin:-8px;"></iframe><form method="dialog">
-    <button>閉じる</button>
-    </form></dialog>
 </body>
 
 </html>
