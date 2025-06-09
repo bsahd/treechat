@@ -17,7 +17,13 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
         http_response_code(404);
     ?>
         post not found
-        <a href="./">back</a>
+        <?php
+        if ($_POST["style"] == "dialog"){
+            ?><button type="button" onclick="window.parent.postMessage('closedialog', '*');">close</button><?php
+        }else{
+            ?><a href="./">戻る</a><?php
+        }
+        ?>
     <?php
         exit;
     }
@@ -25,7 +31,13 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
         http_response_code(403);
     ?>
         ユーザーが違うため、削除できません
-        <a href="./">back</a>
+        <?php
+        if ($_POST["style"] == "dialog"){
+            ?><button type="button" onclick="window.parent.postMessage('closedialog', '*');">close</button><?php
+        }else{
+            ?><a href="./">戻る</a><?php
+        }
+        ?>
     <?php
         exit;
     }
@@ -36,8 +48,12 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
         http_response_code(503);
     ?>
         小要素があるため、削除できません
-        <a href="./">back</a>
-<?php
+        <?php
+        if ($_POST["style"] == "dialog"){
+            ?><button type="button" onclick="window.parent.postMessage('closedialog', '*');">close</button><?php
+        }else{
+            ?><a href="./">戻る</a><?php
+        }
         exit;
     }
     $tree = array_values(array_filter($tree, function ($item) {
@@ -46,7 +62,11 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
     ftruncate($fp, 0);      // ファイルを切り詰めます
     fwrite($fp, json_encode($tree, JSON_UNESCAPED_UNICODE));
     fflush($fp);            // 出力をフラッシュしてからロックを解放します
-    header("Location: ./");
+    if($_POST["style"] == "dialog"){
+        ?>完了<script>window.parent.postMessage('reload', '*');</script><?php
+    }else{
+        header("Location: ./");
+    }
 } else {
     echo "ファイルを取得できません!";
     exit;

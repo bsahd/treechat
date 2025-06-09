@@ -62,6 +62,28 @@ if (!array_key_exists("name", $_SESSION)) {
             }
         }
         setTimeout(checkUpdate, 2000);
+        window.addEventListener("load",()=>{
+            document.querySelectorAll("form").forEach(el=>{
+                el.target="formsend"
+                el.onsubmit=()=>{
+                    document.getElementsByName("formsend")[0].src = "data:text/plain,Loading..."
+                    console.log("submit");
+                    document.getElementById("fsenddialog").showModal();
+                }
+                const hiddenv = document.createElement("input");
+                hiddenv.type="hidden";
+                hiddenv.name="style";
+                hiddenv.value="dialog";
+                el.append(hiddenv);
+            })
+            window.addEventListener("message", (response) => {
+                if(response.data == "closedialog"){
+                    document.getElementById("fsenddialog").close();
+                }else if(response.data == "reload"){
+                    location.reload();
+                }
+            })
+        })
     </script>
     <?php
     function generateHTML($root)
@@ -107,6 +129,9 @@ if (!array_key_exists("name", $_SESSION)) {
     }
     generateHTML("root")
     ?>
+    <dialog id="fsenddialog"><iframe src="data:text/plain,Loading..." frameborder="0" name="formsend" style="margin:-8px;"></iframe><form method="dialog">
+    <button>閉じる</button>
+    </form></dialog>
 </body>
 
 </html>

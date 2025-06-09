@@ -21,7 +21,13 @@ if ($_POST["text"] == "") {
     <body>
         <h1>ツリーチャット:エラー</h1>
         <p>投稿が空です。</p>
-        <a href="./">戻る</a>
+        <?php
+        if ($_POST["style"] == "dialog"){
+            ?><button type="button" onclick="window.parent.postMessage('closedialog', '*');">close</button><?php
+        }else{
+            ?><a href="./">戻る</a><?php
+        }
+        ?>
     </body>
 
     </html>
@@ -45,7 +51,11 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
     fwrite($fp, json_encode($tree, JSON_UNESCAPED_UNICODE));
     fflush($fp);            // 出力をフラッシュしてからロックを解放します
     flock($fp, LOCK_UN);    // ロックを解放します
-    header("Location: ./");
+    if($_POST["style"] == "dialog"){
+        ?>完了<script>window.parent.postMessage('reload', '*');</script><?php
+    }else{
+        header("Location: ./");
+    }
 } else {
     echo "ファイルを取得できません!";
     exit;
