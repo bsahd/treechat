@@ -17,28 +17,58 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
     if (!key_exists(0, $post)) {
         http_response_code(404);
     ?>
-        post not found
-        <?php
-        if ($style == "dialog"){
-            ?><button type="button" onclick="window.parent.postMessage('closedialog', '*');">close</button><?php
-        }else{
-            ?><a href="./">戻る</a><?php
-        }
-        ?>
+        <!DOCTYPE html>
+        <html lang="ja">
+
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>ツリーチャット:エラー</title>
+            <link rel="stylesheet" href="style.css">
+        </head>
+
+        <body>
+            <h1>ツリーチャット:エラー</h1>
+            <p>投稿が見つかりません</p>
+            <?php
+            if ($style == "dialog"){
+                ?><button type="button" onclick="window.parent.postMessage('closedialog', '*');">close</button><?php
+            }else{
+                ?><a href="./">戻る</a><?php
+            }
+            ?>
+        </body>
+
+        </html>
     <?php
         exit;
     }
     if ($post[0]["name"] != $_SESSION["name"]) {
         http_response_code(403);
     ?>
-        ユーザーが違うため、削除できません
-        <?php
-        if ($style == "dialog"){
-            ?><button type="button" onclick="window.parent.postMessage('closedialog', '*');">close</button><?php
-        }else{
-            ?><a href="./">戻る</a><?php
-        }
-        ?>
+        <!DOCTYPE html>
+        <html lang="ja">
+
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>ツリーチャット:エラー</title>
+            <link rel="stylesheet" href="style.css">
+        </head>
+
+        <body>
+            <h1>ツリーチャット:エラー</h1>
+            <p>ユーザーが違うため、削除できません</p>
+            <?php
+            if ($style == "dialog"){
+                ?><button type="button" onclick="window.parent.postMessage('closedialog', '*');">close</button><?php
+            }else{
+                ?><a href="./">戻る</a><?php
+            }
+            ?>
+        </body>
+
+        </html>
     <?php
         exit;
     }
@@ -48,13 +78,30 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
     if (count($child) != 0) {
         http_response_code(503);
     ?>
-        小要素があるため、削除できません
+        <!DOCTYPE html>
+        <html lang="ja">
+
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>ツリーチャット:エラー</title>
+            <link rel="stylesheet" href="style.css">
+        </head>
+
+        <body>
+            <h1>ツリーチャット:エラー</h1>
+            <p>小要素があるため、削除できません</p>
+            <?php
+            if ($style == "dialog"){
+                ?><button type="button" onclick="window.parent.postMessage('closedialog', '*');">close</button><?php
+            }else{
+                ?><a href="./">戻る</a><?php
+            }
+            ?>
+        </body>
+
+        </html>
         <?php
-        if ($style == "dialog"){
-            ?><button type="button" onclick="window.parent.postMessage('closedialog', '*');">close</button><?php
-        }else{
-            ?><a href="./">戻る</a><?php
-        }
         exit;
     }
     $tree = array_values(array_filter($tree, function ($item) {
