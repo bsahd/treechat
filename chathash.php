@@ -7,4 +7,4 @@ if (flock($fp, LOCK_SH)) {  // 排他ロックを確保します
     exit;
 }
 fclose($fp);
-?><?= hash("sha256", $treetext)?>
+?><?= hash("sha256", $treetext) ?>

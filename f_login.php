@@ -2,8 +2,10 @@
 $users = json_decode(file_get_contents("users.json"), TRUE);
 session_start();
 session_regenerate_id(true);
-if (isset($users[$_POST["name"]]) && 
-$users[$_POST["name"]] == "" && $_POST['pass'] == "") {
+if (
+    isset($users[$_POST["name"]]) &&
+    $users[$_POST["name"]] == "" && $_POST['pass'] == ""
+) {
     $_SESSION['name'] = $_POST["name"];
     header("Location: ./passwd.php");
     exit;
@@ -13,7 +15,7 @@ if (isset($users[$_POST["name"]]) && password_verify($_POST['pass'], $users[$_PO
     header("Location: ./");
 } else {
     http_response_code(503);
-?>
+    ?>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -29,6 +31,6 @@ if (isset($users[$_POST["name"]]) && password_verify($_POST['pass'], $users[$_PO
     </body>
 
     </html>
-<?php
+    <?php
 
 }

@@ -1,5 +1,5 @@
 <?php
-session_start(['read_and_close'=>1]);
+session_start(['read_and_close' => 1]);
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -13,7 +13,7 @@ session_start(['read_and_close'=>1]);
 
 <body>
     <h1>ツリーチャット:パスワード変更</h1>
-    <p><?= $_SESSION["name"]?> としてログインしています <a href="logout.php">ログアウト</a></p>
+    <p><?= $_SESSION["name"] ?> としてログインしています <a href="logout.php">ログアウト</a></p>
 
     <form action="f_passwd.php" method="post">
         <div>

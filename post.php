@@ -2,13 +2,13 @@
 session_start(['read_and_close' => 1]);
 $style = $_POST["style"] ?? "";
 if (!array_key_exists("name", $_SESSION)) {
-?>
+    ?>
     not logined
-<?php
+    <?php
     exit;
 }
 if ($_POST["text"] == "") {
-?>
+    ?>
     <!DOCTYPE html>
     <html lang="ja">
 
@@ -23,16 +23,17 @@ if ($_POST["text"] == "") {
         <h1>ツリーチャット:エラー</h1>
         <p>投稿が空です。</p>
         <?php
-        if ($style == "dialog"){
-            ?><button type="button" onclick="window.parent.postMessage('closedialog', '*');">close</button><?php
-        }else{
+        if ($style == "dialog") {
+            ?><button type="button"
+                onclick="window.parent.postMessage('closedialog', '*');">close</button><?php
+        } else {
             ?><a href="./">戻る</a><?php
         }
         ?>
     </body>
 
     </html>
-<?php
+    <?php
     exit;
 }
 
@@ -52,9 +53,11 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
     fwrite($fp, json_encode($tree, JSON_UNESCAPED_UNICODE));
     fflush($fp);            // 出力をフラッシュしてからロックを解放します
     flock($fp, LOCK_UN);    // ロックを解放します
-    if($style == "dialog"){
-        ?>完了<script>window.parent.postMessage('reload', '*');</script><?php
-    }else{
+    if ($style == "dialog") {
+        ?>完了
+        <script>window.parent.postMessage('reload', '*');</script>
+        <?php
+    } else {
         header("Location: ./");
     }
 } else {
