@@ -22,6 +22,7 @@ if ($_POST["text"] == "") {
     <body>
         <h1>ツリーチャット:エラー</h1>
         <p>投稿が空です。</p>
+        <script>window.parent.postMessage('dialogloaded', '*');</script>
         <?php
         if ($style == "dialog") {
             ?><button type="button"
