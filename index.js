@@ -16,8 +16,8 @@ async function checkUpdate() {
     const a = await (await fetch("chathash.php")).text();
     if (CHAT_HASH != a) {
       updateStatus.innerText = "更新があります";
-      document.getElementsByName("formsend")[0].src =
-        "data:text/plain,Loading...";
+      document.getElementById("dialogspin").style = "";
+      document.getElementsByName("formsend")[0].src = "about:blank";
       document.getElementById("fsenddialog").showModal();
       location.reload();
     } else {
@@ -34,8 +34,8 @@ globalThis.addEventListener("load", () => {
   document.querySelectorAll("form").forEach((el) => {
     el.target = "formsend";
     el.onsubmit = () => {
-      document.getElementsByName("formsend")[0].src =
-        "data:text/plain,Loading...";
+      document.getElementById("dialogspin").style = "";
+      document.getElementsByName("formsend")[0].src = "about:blank";
       console.log("submit");
       document.getElementById("fsenddialog").showModal();
     };
@@ -50,6 +50,8 @@ globalThis.addEventListener("load", () => {
       document.getElementById("fsenddialog").close();
     } else if (response.data == "reload") {
       location.reload();
+    } else if (response.data == "dialogloaded") {
+      document.getElementById("dialogspin").style = "display:none;";
     }
   });
 });

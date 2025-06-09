@@ -35,7 +35,9 @@ if (!array_key_exists("name", $_SESSION)) {
         var CHAT_HASH = "<?= hash("sha256", $treetext) ?>"
     </script>
     <script src="index.js"></script>
-    <dialog id="fsenddialog"><iframe src="data:text/plain,Loading..."
+    <dialog id="fsenddialog">
+        <span id="dialogspin"><?php include("loading.svg"); ?></span><br>
+        <iframe src="about:blank"
             frameborder="0" name="formsend" style="margin:-8px;"></iframe>
         <form method="dialog">
             <button>閉じる</button>
