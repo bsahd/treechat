@@ -87,9 +87,11 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
     fflush($fp);            // 出力をフラッシュしてからロックを解放します
     flock($fp, LOCK_UN);    // ロックを解放します
     if ($style == "dialog") {
-        ?><script>window.parent.postMessage('reload', '*');</script><?php
+        ?>
+        <script>window.parent.postMessage({ action: "posted", id: "<?= $post["id"] ?>" }, '*');</script>
+        <?php
     } else {
-        header("Location: ./");
+        header("Location: ./#post-" . $post["id"]);
     }
 } else {
     echo "ファイルを取得できません!";

@@ -51,9 +51,17 @@ globalThis.addEventListener("load", () => {
     if (response.data == "closedialog") {
       fsenddialog.close();
     } else if (response.data == "reload") {
-      location.href = "./";
+      formsend.src = "about:blank";
+      setTimeout(()=>location.reload(),100);
     } else if (response.data == "dialogloaded") {
       dialogspin.classList.add("done");
+    } else if (
+      typeof response.data == "object" && response.data != null &&
+      response.data.action == "posted"
+    ) {
+      location.href = "./#post-" + response.data.id;
+      formsend.src = "about:blank";
+      setTimeout(()=>location.reload(),100);
     }
   });
 });

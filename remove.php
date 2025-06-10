@@ -108,6 +108,7 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
         <?php
         exit;
     }
+    $postparent = $post[0]["parent"] ?? "root";
     $tree = array_values(array_filter($tree, function ($item) {
         return $_POST["id"] != $item["id"];
     }));
@@ -115,10 +116,13 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
     fwrite($fp, json_encode($tree, JSON_UNESCAPED_UNICODE));
     fflush($fp);            // 出力をフラッシュしてからロックを解放します
     if ($style == "dialog") {
-        ?><script>window.parent.postMessage('reload', '*');</script><?php
+        ?>
+        <script>window.parent.postMessage({ action: "posted", id: "<?= $postparent ?>" }, '*');</script>
+        <?php
     } else {
-        header("Location: ./");
+        header("Location: ./#" . $postparent);
     }
+
 } else {
     echo "ファイルを取得できません!";
     exit;
