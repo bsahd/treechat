@@ -2,9 +2,7 @@
 session_start(['read_and_close' => 1]);
 $style = $_POST["style"] ?? "";
 if (!array_key_exists("name", $_SESSION)) {
-    ?>
-    not logined
-    <?php
+    header("Location: ./");
     exit;
 }
 if ($_POST["text"] == "") {
