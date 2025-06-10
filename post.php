@@ -42,6 +42,40 @@ $fp = fopen("chat.json", "r+");
 if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
     $tree = json_decode(fread($fp, filesize("chat.json")), TRUE);
     fseek($fp, 0);
+    $parentpost = array_values(array_filter($tree, function ($item) {
+        return $_POST["parent"] == $item["id"];
+    }));
+    if (!key_exists(0, $parentpost) && $_POST["parent"] != "root") {
+        http_response_code(404);
+        ?>
+        <!DOCTYPE html>
+        <html lang="ja">
+
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>ツリーチャット:エラー</title>
+            <link rel="stylesheet" href="style.css">
+        </head>
+
+        <body>
+            <h1>ツリーチャット:エラー</h1>
+            <p>投稿が見つかりません</p>
+            <script>window.parent.postMessage('dialogloaded', '*');</script>
+            <?php
+            if ($style == "dialog") {
+                ?><button type="button"
+                    onclick="window.parent.postMessage('closedialog', '*');">close</button><?php
+            } else {
+                ?><a href="./">戻る</a><?php
+            }
+            ?>
+        </body>
+
+        </html>
+        <?php
+        exit;
+    }
     ftruncate($fp, 0);      // ファイルを切り詰めます
     $post = [
         "id" => uniqid("", true),
