@@ -10,32 +10,33 @@ function date2str(d) {
     "timeZoneName": "short",
   });
 }
-const updateStatus = document.getElementById("updateStatus");
-const fsenddialog = document.getElementById("fsenddialog");
-const dialogspin = document.getElementById("dialogspin");
-const formsend = document.getElementsByName("formsend")[0];
-async function checkUpdate() {
-  try {
-    const a = await (await fetch("chathash.php")).text();
-    if (CHAT_HASH != a) {
-      updateStatus.innerText = "更新があります";
-      dialogspin.classList.remove("done");
-      formsend.src = "about:blank";
-      fsenddialog.showModal();
-      location.href = "./";
-    } else {
-      const v = date2str(new Date());
-      updateStatus.innerText = "✅" + v + ": 更新なし";
-      setTimeout(checkUpdate, 2000);
+globalThis.addEventListener("load", () => {
+  const updateStatus = document.getElementById("updateStatus");
+  const fsenddialog = document.getElementById("fsenddialog");
+  const dialogspin = document.getElementById("dialogspin");
+  const formsend = document.getElementsByName("formsend")[0];
+  async function checkUpdate() {
+    try {
+      const a = await (await fetch("chathash.php")).text();
+      if (CHAT_HASH != a) {
+        updateStatus.innerText = "更新があります";
+        dialogspin.classList.remove("done");
+        formsend.src = "about:blank";
+        fsenddialog.showModal();
+        location.href = "./";
+      } else {
+        const v = date2str(new Date());
+        updateStatus.innerText = "✅" + v + ": 更新なし";
+        setTimeout(checkUpdate, 2000);
+      }
+    } catch {
+      updateStatus.innerText = "⛔エラー";
     }
-  } catch {
-    updateStatus.innerText = "⛔エラー";
   }
-}
-setTimeout(checkUpdate, 2000);
+  setTimeout(checkUpdate, 2000);
   document.querySelectorAll("form").forEach((el) => {
     el.target = "formsend";
-    el.onsubmit = (event) => {
+    el.addEventListener("submit", (event) => {
       event.preventDefault();
       setTimeout(() => {
         event.target.submit(); // 1秒後に手動で送信
@@ -43,7 +44,7 @@ setTimeout(checkUpdate, 2000);
       dialogspin.classList.remove("done");
       formsend.src = "about:blank";
       fsenddialog.showModal();
-    };
+    });
     const hiddenv = document.createElement("input");
     hiddenv.type = "hidden";
     hiddenv.name = "style";
@@ -59,3 +60,4 @@ setTimeout(checkUpdate, 2000);
       dialogspin.classList.add("done");
     }
   });
+});
