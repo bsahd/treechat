@@ -20,10 +20,6 @@ globalThis.addEventListener("load", () => {
       const a = await (await fetch("chathash.php")).text();
       if (CHAT_HASH != a) {
         updateStatus.innerText = "更新があります";
-        dialogspin.classList.remove("done");
-        formsend.src = "about:blank";
-        fsenddialog.showModal();
-        location.href = "./";
       } else {
         const v = date2str(new Date());
         updateStatus.innerText = "✅" + v + ": 更新なし";
