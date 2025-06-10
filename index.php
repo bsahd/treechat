@@ -31,17 +31,15 @@ if (!array_key_exists("name", $_SESSION)) {
     <p><?= $_SESSION["name"] ?> としてログインしています <a href="logout.php">ログアウト</a> <a
             href="passwd.php">パスワード変更</a></p>
     <p id="updateStatus"><?= $nowtime ?>時点の情報です</p>
-    <script>
-        var CHAT_HASH = "<?= hash("sha256", $treetext) ?>"
-    </script>
-    <script src="index.js"></script>
     <dialog id="fsenddialog">
-        <span id="dialogspin"><?php include("loading.svg"); ?></span><br>
-        <iframe src="about:blank"
-            frameborder="0" name="formsend" style="margin:-8px;"></iframe>
-        <form method="dialog">
-            <button>閉じる</button>
-        </form>
+        <div class="progress-bar" id="dialogspin">
+            <div class="indeterminate"></div>
+        </div>
+        <iframe src="about:blank" frameborder="0" name="formsend"
+            style="margin:-8px;" sandbox="allow-scripts"></iframe>
+        <br>
+        <button
+            onclick="document.getElementById('fsenddialog').close()">閉じる</button>
     </dialog>
     <?php
     function generateHTML($root)
@@ -87,6 +85,10 @@ if (!array_key_exists("name", $_SESSION)) {
     }
     generateHTML("root")
         ?>
+    <script>
+        var CHAT_HASH = "<?= hash("sha256", $treetext) ?>"
+    </script>
+    <script src="index.js" async></script>
 </body>
 
 </html>

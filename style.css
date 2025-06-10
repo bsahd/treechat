@@ -1,5 +1,5 @@
 * {
-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
@@ -9,8 +9,8 @@ body {
     color: #444;
     margin: 1em;
 }
-input[type=text],
-input[type=submit],
+input[type="text"],
+input[type="submit"],
 button {
     font-size: 0.9em;
     line-height: 1.2;
@@ -20,14 +20,14 @@ button {
     color: #444;
 }
 
-input[type=text] {
+input[type="text"] {
     background: #fff;
     border-radius: 2px;
     width: 100%;
     max-width: 400px;
 }
 
-input[type=submit],
+input[type="submit"],
 button {
     background-color: #eee;
     cursor: pointer;
@@ -56,17 +56,51 @@ li {
     margin: 0.25em 0;
 }
 
-dialog iframe{
+dialog iframe {
     width: 320px;
-    height:240px;
+    height: 240px;
 }
-dialog{
+dialog {
     max-width: calc(100% - 4px);
-    border:none;
+    border: none;
     box-shadow: 0 4px 8px #0008;
 }
-dialog::backdrop{
+dialog::backdrop {
     position: fixed;
     inset: 0px;
     background: rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar {
+    position: relative;
+    width: 100%;
+    height: 4px;
+    background-color: #ccc;
+    overflow: hidden;
+}
+
+.indeterminate {
+    position: absolute;
+    width: 30%;
+    height: 100%;
+    background-color: #2196f3;
+    animation: move 1.5s infinite linear;
+}
+
+@keyframes move {
+    0% {
+        left: -30%;
+    }
+    50% {
+        left: 50%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+.progress-bar.done .indeterminate {
+  animation: none;
+  opacity: 0;
+  pointer-events: none;
 }

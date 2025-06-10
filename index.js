@@ -11,14 +11,17 @@ function date2str(d) {
   });
 }
 const updateStatus = document.getElementById("updateStatus");
+const fsenddialog = document.getElementById("fsenddialog");
+const dialogspin = document.getElementById("dialogspin");
+const formsend = document.getElementsByName("formsend")[0];
 async function checkUpdate() {
   try {
     const a = await (await fetch("chathash.php")).text();
     if (CHAT_HASH != a) {
       updateStatus.innerText = "更新があります";
-      document.getElementById("dialogspin").style = "";
-      document.getElementsByName("formsend")[0].src = "about:blank";
-      document.getElementById("fsenddialog").showModal();
+      dialogspin.classList.remove("done");
+      formsend.src = "about:blank";
+      fsenddialog.showModal();
       location.href = "./";
     } else {
       const v = date2str(new Date());
@@ -30,14 +33,16 @@ async function checkUpdate() {
   }
 }
 setTimeout(checkUpdate, 2000);
-globalThis.addEventListener("load", () => {
   document.querySelectorAll("form").forEach((el) => {
     el.target = "formsend";
-    el.onsubmit = () => {
-      document.getElementById("dialogspin").style = "";
-      document.getElementsByName("formsend")[0].src = "about:blank";
-      console.log("submit");
-      document.getElementById("fsenddialog").showModal();
+    el.onsubmit = (event) => {
+      event.preventDefault();
+      setTimeout(() => {
+        event.target.submit(); // 1秒後に手動で送信
+      }, 500);
+      dialogspin.classList.remove("done");
+      formsend.src = "about:blank";
+      fsenddialog.showModal();
     };
     const hiddenv = document.createElement("input");
     hiddenv.type = "hidden";
@@ -47,11 +52,10 @@ globalThis.addEventListener("load", () => {
   });
   globalThis.addEventListener("message", (response) => {
     if (response.data == "closedialog") {
-      document.getElementById("fsenddialog").close();
+      fsenddialog.close();
     } else if (response.data == "reload") {
       location.href = "./";
     } else if (response.data == "dialogloaded") {
-      document.getElementById("dialogspin").style = "display:none;";
+      dialogspin.classList.add("done");
     }
   });
-});
