@@ -46,7 +46,7 @@ if (!array_key_exists("name", $_SESSION)) {
             sandbox="allow-scripts"></iframe>
     </dialog>
     <?php
-    function generateTxt($root)
+    function createChatTree($root)
     {
         ?>
         <ul>
@@ -65,7 +65,7 @@ if (!array_key_exists("name", $_SESSION)) {
                         document.getElementById("date-<?= $citem["unixtime"] ?>").innerText = date2str(new Date(<?= $citem["unixtime"] * 1000 ?>))
                     </script>
                     <?php
-                    generateTxt($citem["id"])
+                    createChatTree($citem["id"])
                         ?>
                 </li>
                 <?php
@@ -74,7 +74,7 @@ if (!array_key_exists("name", $_SESSION)) {
         </ul>
         <?php
     }
-    generateTxt("root")
+    createChatTree("root")
         ?>
 </body>
 

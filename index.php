@@ -46,7 +46,7 @@ if (!array_key_exists("name", $_SESSION)) {
             sandbox="allow-scripts"></iframe>
     </dialog>
     <?php
-    function generateTxt($root)
+    function createChatTree($root)
     {
         ?>
         <ul>
@@ -69,7 +69,7 @@ if (!array_key_exists("name", $_SESSION)) {
                         <input type="submit" value="削除">
                     </form>
                     <?php
-                    generateTxt($citem["id"])
+                    createChatTree($citem["id"])
                         ?>
                 </li>
                 <?php
@@ -87,7 +87,7 @@ if (!array_key_exists("name", $_SESSION)) {
         </ul>
         <?php
     }
-    generateTxt("root")
+    createChatTree("root")
         ?>
 </body>
 
