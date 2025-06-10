@@ -27,12 +27,12 @@ if (!array_key_exists("name", $_SESSION)) {
     <script>
         var CHAT_HASH = "<?= hash("sha256", $treetext) ?>"
     </script>
-    <script src="index.js"></script>
+    <script src="view.js"></script>
 </head>
 
 <body>
     <h1>ツリーチャット</h1>
-    <p>フォーム[表示|<a href="view.php">非表示</>]</p>
+    <p>フォーム[<a href="./">表示</a>|非表示]</p>
     <p><?= $_SESSION["name"] ?> としてログインしています <a href="logout.php">ログアウト</a> <a
             href="passwd.php">パスワード変更</a></p>
     <p id="updateStatus"><?= $nowtime ?>時点の情報です</p>
@@ -64,10 +64,6 @@ if (!array_key_exists("name", $_SESSION)) {
                     <script>
                         document.getElementById("date-<?= $citem["unixtime"] ?>").innerText = date2str(new Date(<?= $citem["unixtime"] * 1000 ?>))
                     </script>
-                    <form action="remove.php" method="post" style="display:inline;">
-                        <input type="hidden" name="id" value="<?= $citem["id"] ?>">
-                        <input type="submit" value="削除">
-                    </form>
                     <?php
                     generateTxt($citem["id"])
                         ?>
@@ -75,15 +71,6 @@ if (!array_key_exists("name", $_SESSION)) {
                 <?php
             }
             ?>
-            <li>
-                <form action="./post.php" method="post">
-                    <input type="hidden" name="parent"
-                        value="<?= htmlspecialchars($root) ?>">
-                    <label>返信:<input type="text" name="text" size="40"
-                            autocomplete="off"></label>
-                    <input type="submit" value="投稿">
-                </form>
-            </li>
         </ul>
         <?php
     }
