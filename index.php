@@ -1,4 +1,4 @@
-<a?php
+<?php
 $nowtime = date("Y/m/d H:i:s", $_SERVER['REQUEST_TIME']) . " UTC";
 session_start(['read_and_close' => 1]);
 $fp = fopen("chat.json", "r");
