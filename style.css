@@ -71,7 +71,7 @@ dialog::backdrop {
     inset: 0px;
     background: rgba(0, 0, 0, 0.1);
 }
-dialog>button{
+dialog > button {
     background: transparent;
     border: none;
     display: block;
@@ -81,7 +81,7 @@ dialog>button{
     margin-right: -15px;
 }
 
-dialog>.progress-bar{
+dialog > .progress-bar {
     margin-top: -2px;
     margin-bottom: 4px;
 }
@@ -115,8 +115,7 @@ dialog>.progress-bar{
 }
 
 .progress-bar.done .indeterminate {
-  animation: none;
-  opacity: 0;
-  pointer-events: none;
+    animation: none;
+    opacity: 0;
+    pointer-events: none;
 }
-
