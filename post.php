@@ -87,9 +87,7 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
     fflush($fp);            // 出力をフラッシュしてからロックを解放します
     flock($fp, LOCK_UN);    // ロックを解放します
     if ($style == "dialog") {
-        ?>完了
-        <script>window.parent.postMessage('reload', '*');</script>
-        <?php
+        ?><script>window.parent.postMessage('reload', '*');</script><?php
     } else {
         header("Location: ./");
     }

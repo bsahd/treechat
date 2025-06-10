@@ -115,9 +115,7 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
     fwrite($fp, json_encode($tree, JSON_UNESCAPED_UNICODE));
     fflush($fp);            // 出力をフラッシュしてからロックを解放します
     if ($style == "dialog") {
-        ?>完了
-        <script>window.parent.postMessage('reload', '*');</script>
-        <?php
+        ?><script>window.parent.postMessage('reload', '*');</script><?php
     } else {
         header("Location: ./");
     }
