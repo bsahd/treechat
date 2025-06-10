@@ -32,14 +32,13 @@ if (!array_key_exists("name", $_SESSION)) {
             href="passwd.php">パスワード変更</a></p>
     <p id="updateStatus"><?= $nowtime ?>時点の情報です</p>
     <dialog id="fsenddialog">
+        <button
+            onclick="document.getElementById('fsenddialog').close()"><img src="close.png" alt="閉じる"></button>
         <div class="progress-bar" id="dialogspin">
             <div class="indeterminate"></div>
         </div>
         <iframe src="about:blank" frameborder="0" name="formsend"
-            style="margin:-8px;" sandbox="allow-scripts"></iframe>
-        <br>
-        <button
-            onclick="document.getElementById('fsenddialog').close()">閉じる</button>
+            sandbox="allow-scripts"></iframe>
     </dialog>
     <?php
     function generateHTML($root)
