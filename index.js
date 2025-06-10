@@ -19,7 +19,7 @@ async function checkUpdate() {
       document.getElementById("dialogspin").style = "";
       document.getElementsByName("formsend")[0].src = "about:blank";
       document.getElementById("fsenddialog").showModal();
-      location.reload();
+      location.href = "./";
     } else {
       const v = date2str(new Date());
       updateStatus.innerText = "✅" + v + ": 更新なし";
@@ -49,7 +49,7 @@ globalThis.addEventListener("load", () => {
     if (response.data == "closedialog") {
       document.getElementById("fsenddialog").close();
     } else if (response.data == "reload") {
-      location.reload();
+      location.href = "./";
     } else if (response.data == "dialogloaded") {
       document.getElementById("dialogspin").style = "display:none;";
     }
