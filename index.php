@@ -24,6 +24,10 @@ if (!array_key_exists("name", $_SESSION)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ツリーチャット</title>
     <link rel="stylesheet" href="style.css">
+    <script>
+        var CHAT_HASH = "<?= hash("sha256", $treetext) ?>"
+    </script>
+    <script src="index.js"></script>
 </head>
 
 <body>
@@ -84,10 +88,6 @@ if (!array_key_exists("name", $_SESSION)) {
     }
     generateHTML("root")
         ?>
-    <script>
-        var CHAT_HASH = "<?= hash("sha256", $treetext) ?>"
-    </script>
-    <script src="index.js" async></script>
 </body>
 
 </html>
