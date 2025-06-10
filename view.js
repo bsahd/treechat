@@ -21,6 +21,7 @@ globalThis.addEventListener("load", () => {
       } else {
         const v = date2str(new Date());
         updateStatus.innerText = "✅" + v + ": 更新なし";
+        setTimeout(checkUpdate, 2000);
       }
     } catch {
       updateStatus.innerText = "⛔エラー";
