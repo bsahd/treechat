@@ -46,7 +46,9 @@ h1, p {
     margin: 0;
     padding: 0;
 }
-
+h1{
+    font-weight: normal;
+}
 ul {
     margin-left: 1.2em;
     padding-left: 0.5em;
