@@ -1,4 +1,4 @@
-<?php
+<a?php
 $nowtime = date("Y/m/d H:i:s", $_SERVER['REQUEST_TIME']) . " UTC";
 session_start(['read_and_close' => 1]);
 $fp = fopen("chat.json", "r");
@@ -32,7 +32,7 @@ if (!array_key_exists("name", $_SESSION)) {
 
 <body>
     <h1>ツリーチャット</h1>
-    <p>フォーム[表示|<a href="view.php">非表示</>]</p>
+    <p>フォーム[表示|<a href="view.php">非表示</a>]</p>
     <p><?= $_SESSION["name"] ?> としてログインしています <a href="logout.php">ログアウト</a> <a
             href="passwd.php">パスワード変更</a></p>
     <p id="updateStatus"><?= $nowtime ?>時点の情報です</p>
