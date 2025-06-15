@@ -1,6 +1,7 @@
 <?php
 session_start(['read_and_close' => 1]);
 if (!array_key_exists("name", $_SESSION)) {
+    http_response_code(401);
     ?>
     not logined
     <?php
@@ -13,7 +14,7 @@ if ($_POST["pass"] == $_POST["pass2"]) {
         $users = json_decode(fread($fp, filesize("users.json")), TRUE);
         fseek($fp, 0);
         ftruncate($fp, 0);      // ファイルを切り詰めます
-        $users[$_SESSION["name"]] = password_hash($_POST["pass"], null);
+        $users[$_SESSION["name"]]["pw"] = password_hash($_POST["pass"], null);
         fwrite($fp, json_encode($users, JSON_UNESCAPED_UNICODE));
         fflush($fp);            // 出力をフラッシュしてからロックを解放します
         flock($fp, LOCK_UN);    // ロックを解放します

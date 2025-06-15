@@ -4,17 +4,17 @@ session_start();
 session_regenerate_id(true);
 if (
     isset($users[$_POST["name"]]) &&
-    $users[$_POST["name"]] == "" && $_POST['pass'] == ""
+    $users[$_POST["name"]]["pw"] == "" && $_POST['pass'] == ""
 ) {
     $_SESSION['name'] = $_POST["name"];
     header("Location: ./passwd.php");
     exit;
 }
-if (isset($users[$_POST["name"]]) && password_verify($_POST['pass'], $users[$_POST["name"]])) {
+if (isset($users[$_POST["name"]]) && password_verify($_POST['pass'], $users[$_POST["name"]]["pw"])) {
     $_SESSION['name'] = $_POST["name"];
     header("Location: ./");
 } else {
-    http_response_code(503);
+    http_response_code(401);
     ?>
     <!DOCTYPE html>
     <html lang="en">

@@ -78,7 +78,7 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
         return $_POST["id"] == $item["parent"];
     });
     if (count($child) != 0) {
-        http_response_code(503);
+        http_response_code(400);
         ?>
         <!DOCTYPE html>
         <html lang="ja">

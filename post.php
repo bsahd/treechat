@@ -2,10 +2,12 @@
 session_start(['read_and_close' => 1]);
 $style = $_POST["style"] ?? "";
 if (!array_key_exists("name", $_SESSION)) {
+    http_response_code(401);
     header("Location: ./");
     exit;
 }
 if ($_POST["text"] == "") {
+    http_response_code(400);
     ?>
     <!DOCTYPE html>
     <html lang="ja">
