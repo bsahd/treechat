@@ -36,7 +36,6 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
             </div>
             <h1>ツリーチャット:エラー</h1>
             <p>投稿が見つかりません</p>
-            <script>window.parent.postMessage('dialogloaded', '*');</script>
             <a href="./">戻る</a>
         </body>
 
@@ -69,7 +68,6 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
             </div>
             <h1>ツリーチャット:エラー</h1>
             <p>ユーザーが違うため、削除できません</p>
-            <script>window.parent.postMessage('dialogloaded', '*');</script>
             <a href="./">戻る</a>
         </body>
 
@@ -105,7 +103,6 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
             </div>
             <h1>ツリーチャット:エラー</h1>
             <p>小要素があるため、削除できません</p>
-            <script>window.parent.postMessage('dialogloaded', '*');</script>
             <a href="./">戻る</a>
         </body>
 

@@ -35,7 +35,6 @@ if ($_POST["text"] == "") {
         </div>
         <h1>ツリーチャット:エラー</h1>
         <p>投稿が空です。</p>
-        <script>window.parent.postMessage('dialogloaded', '*');</script>
         <a href="./">戻る</a>
     </body>
 
@@ -76,7 +75,6 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
             </div>
             <h1>ツリーチャット:エラー</h1>
             <p>投稿が見つかりません</p>
-            <script>window.parent.postMessage('dialogloaded', '*');</script>
             <a href="./">戻る</a>
         </body>
 
