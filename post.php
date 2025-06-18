@@ -1,6 +1,5 @@
 <?php
 session_start(['read_and_close' => 1]);
-$style = $_POST["style"] ?? "";
 $is_htmx = isset($_SERVER['HTTP_HX_REQUEST']);
 if (!array_key_exists("name", $_SESSION)) {
     if ($is_htmx) {
@@ -111,13 +110,7 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
     fwrite($fp, json_encode($tree, JSON_UNESCAPED_UNICODE));
     fflush($fp);            // 出力をフラッシュしてからロックを解放します
     flock($fp, LOCK_UN);    // ロックを解放します
-    if ($style == "dialog") {
-        ?>
-        <script>window.parent.postMessage({ action: "posted", id: "<?= $post["id"] ?>" }, '*');</script>
-        <?php
-    } else {
-        header("Location: ./#post-" . $post["id"]);
-    }
+    header("Location: ./#post-" . $post["id"]);
 } else {
     echo "ファイルを取得できません!";
     exit;

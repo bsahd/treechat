@@ -10,58 +10,21 @@ function date2str(d) {
     "timeZoneName": "short",
   });
 }
-// globalThis.addEventListener("load", () => {
-//   const updateStatus = document.getElementById("updateStatus");
-//   const fsenddialog = document.getElementById("fsenddialog");
-//   const dialogspin = document.getElementById("dialogspin");
-//   const formsend = document.getElementsByName("formsend")[0];
-//   async function checkUpdate() {
-//     try {
-//       const a = await (await fetch("chathash.php")).text();
-//       if (CHAT_HASH != a) {
-//         updateStatus.innerText = "更新があります";
-//       } else {
-//         const v = date2str(new Date());
-//         updateStatus.innerText = "✅" + v + ": 更新なし";
-//         setTimeout(checkUpdate, 2000);
-//       }
-//     } catch {
-//       updateStatus.innerText = "⛔エラー";
-//     }
-//   }
-//   setTimeout(checkUpdate, 2000);
-//   document.querySelectorAll("form").forEach((el) => {
-//     el.target = "formsend";
-//     el.addEventListener("submit", (event) => {
-//       event.preventDefault();
-//       setTimeout(() => {
-//         event.target.submit(); // 1秒後に手動で送信
-//       }, 500);
-//       dialogspin.classList.remove("done");
-//       formsend.src = "about:blank";
-//       fsenddialog.showModal();
-//     });
-//     const hiddenv = document.createElement("input");
-//     hiddenv.type = "hidden";
-//     hiddenv.name = "style";
-//     hiddenv.value = "dialog";
-//     el.append(hiddenv);
-//   });
-//   globalThis.addEventListener("message", (response) => {
-//     if (response.data == "closedialog") {
-//       fsenddialog.close();
-//     } else if (response.data == "reload") {
-//       formsend.src = "about:blank";
-//       setTimeout(()=>location.reload(),100);
-//     } else if (response.data == "dialogloaded") {
-//       dialogspin.classList.add("done");
-//     } else if (
-//       typeof response.data == "object" && response.data != null &&
-//       response.data.action == "posted"
-//     ) {
-//       location.href = "./#post-" + response.data.id;
-//       formsend.src = "about:blank";
-//       setTimeout(()=>location.reload(),100);
-//     }
-//   });
-// });
+globalThis.addEventListener("load", () => {
+  async function checkUpdate() {
+    const updateStatus = document.getElementById("updateStatus");
+    try {
+      const a = await (await fetch("chathash.php")).text();
+      if (CHAT_HASH != a) {
+        updateStatus.innerText = "更新があります";
+      } else {
+        const v = date2str(new Date());
+        updateStatus.innerText = "✅" + v + ": 更新なし";
+        setTimeout(checkUpdate, 2000);
+      }
+    } catch {
+      updateStatus.innerText = "⛔エラー";
+    }
+  }
+  setTimeout(checkUpdate, 2000);
+});

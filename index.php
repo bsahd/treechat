@@ -41,7 +41,7 @@ if (!array_key_exists("name", $_SESSION)) {
     <p>フォーム[表示|<a href="view.php">非表示</a>]</p>
     <p><?= $_SESSION["name"] ?> としてログインしています <a href="logout.php">ログアウト</a> <a
             href="passwd.php">パスワード変更</a></p>
-    <p id="updateStatus"><?= $nowtime ?>時点の情報です</p>
+    <p><span id="updateStatus"><?= $nowtime ?>時点の情報です</span>: <a href="./">再読み込み</a></p>
     <!-- <dialog id="fsenddialog">
         <button
             onclick="document.getElementById('fsenddialog').close()"><img src="close.png" alt="閉じる"></button>
