@@ -10,21 +10,3 @@ function date2str(d) {
     "timeZoneName": "short",
   });
 }
-globalThis.addEventListener("load", () => {
-  async function checkUpdate() {
-    const updateStatus = document.getElementById("updateStatus");
-    try {
-      const a = await (await fetch("chathash.php")).text();
-      if (CHAT_HASH != a) {
-        updateStatus.innerText = "更新があります";
-      } else {
-        const v = date2str(new Date());
-        updateStatus.innerText = "✅" + v + ": 更新なし";
-        setTimeout(checkUpdate, 2000);
-      }
-    } catch {
-      updateStatus.innerText = "⛔エラー";
-    }
-  }
-  setTimeout(checkUpdate, 2000);
-});

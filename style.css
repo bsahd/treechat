@@ -135,3 +135,9 @@ dialog > .progress-bar {
     top: 0;
     width: 100%;
 }
+#updateloading{
+    display: none;
+}
+#updateloading.htmx-request{
+    display: inline;
+}

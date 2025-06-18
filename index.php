@@ -24,9 +24,6 @@ if (!array_key_exists("name", $_SESSION)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ツリーチャット</title>
     <link rel="stylesheet" href="style.css">
-    <script>
-        var CHAT_HASH = "<?= hash("sha256", $treetext) ?>"
-    </script>
     <script src="index.js"></script>
     <script src="htmx.js"></script>
 </head>
@@ -41,16 +38,10 @@ if (!array_key_exists("name", $_SESSION)) {
     <p>フォーム[表示|<a href="view.php">非表示</a>]</p>
     <p><?= $_SESSION["name"] ?> としてログインしています <a href="logout.php">ログアウト</a> <a
             href="passwd.php">パスワード変更</a></p>
-    <p><span id="updateStatus"><?= $nowtime ?>時点の情報です</span>: <a href="./">再読み込み</a></p>
-    <!-- <dialog id="fsenddialog">
-        <button
-            onclick="document.getElementById('fsenddialog').close()"><img src="close.png" alt="閉じる"></button>
-        <div class="progress-bar" id="dialogspin">
-            <div class="indeterminate"></div>
-        </div>
-        <iframe src="about:blank" frameborder="0" name="formsend"
-            sandbox="allow-scripts"></iframe>
-    </dialog> -->
+    <p><span hx-get="./checkupdate.php?hash=<?= hash("sha256", $treetext) ?>"
+            hx-trigger="load,every 2s"
+            hx-indicator="#updateloading"></span><span
+            id="updateloading">...</span> : <a href="./">再読み込み</a></p>
     <?php
     function createChatTree($root)
     {
