@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ツリーチャット:ログイン</title>
     <link rel="stylesheet" href="style.css">
+    <script src="htmx.js"></script>
 </head>
 
-<body>
+<body hx-boost="true" hx-indicator="#loading">
     <div id="loading">
         <div class="progress-bar" id="dialogspin">
             <div class="indeterminate"></div>
