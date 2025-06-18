@@ -40,7 +40,7 @@ if (!array_key_exists("name", $_SESSION)) {
             href="passwd.php">パスワード変更</a></p>
     <p><span hx-get="./checkupdate.php?hash=<?= hash("sha256", $treetext) ?>"
             hx-trigger="load,every 2s"
-            hx-indicator="#updateloading"></span><span
+            hx-indicator="#updateloading"><?= $nowtime ?>時点の情報です</span><span
             id="updateloading">...</span> : <a href="./">再読み込み</a></p>
     <?php
     function createChatTree($root)
