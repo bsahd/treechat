@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ツリーチャット:ログイン</title>
     <link rel="stylesheet" href="style.css">
-    <script src="htmx.js"></script>
+    <script src="htmx.js" defer></script>
 </head>
 
 <body hx-boost="true" hx-indicator="#loading">

@@ -25,7 +25,7 @@ if (!array_key_exists("name", $_SESSION)) {
     <title>ツリーチャット</title>
     <link rel="stylesheet" href="style.css">
     <script src="index.js"></script>
-    <script src="htmx.js"></script>
+    <script src="htmx.js" defer></script>
 </head>
 
 <body hx-boost="true" hx-indicator="#loading">
