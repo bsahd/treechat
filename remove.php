@@ -1,5 +1,6 @@
 <?php
 session_start(['read_and_close' => 1]);
+$is_htmx = isset($_SERVER['HTTP_HX_REQUEST']);
 $style = $_POST["style"] ?? "";
 if (!array_key_exists("name", $_SESSION)) {
     header("Location: ./");
@@ -13,8 +14,11 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
         return $_POST["id"] == $item["id"];
     }));
     if (!key_exists(0, $post)) {
-        http_response_code(404);
-        ?>
+        if ($is_htmx) {
+            http_response_code(200);
+        } else {
+            http_response_code(404);
+        } ?>
         <!DOCTYPE html>
         <html lang="ja">
 
@@ -44,7 +48,11 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
         exit;
     }
     if ($post[0]["name"] != $_SESSION["name"]) {
-        http_response_code(403);
+        if ($is_htmx) {
+            http_response_code(200);
+        } else {
+            http_response_code(403);
+        }
         ?>
         <!DOCTYPE html>
         <html lang="ja">
@@ -78,7 +86,11 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
         return $_POST["id"] == $item["parent"];
     });
     if (count($child) != 0) {
-        http_response_code(400);
+        if ($is_htmx) {
+            http_response_code(200);
+        } else {
+            http_response_code(400);
+        }
         ?>
         <!DOCTYPE html>
         <html lang="ja">

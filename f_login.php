@@ -26,6 +26,11 @@ if (isset($users[$_POST["name"]]) && password_verify($_POST['pass'], $users[$_PO
     </head>
 
     <body>
+        <div id="loading">
+            <div class="progress-bar" id="dialogspin">
+                <div class="indeterminate"></div>
+            </div>
+        </div>
         <h1>ツリーチャット:ログイン失敗</h1>
         <a href="./">戻る</a>
     </body>

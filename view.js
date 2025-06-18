@@ -10,22 +10,22 @@ function date2str(d) {
     "timeZoneName": "short",
   });
 }
-globalThis.addEventListener("load", () => {
-  const updateStatus = document.getElementById("updateStatus");
-  async function checkUpdate() {
-    try {
-      const a = await (await fetch("chathash.php")).text();
-      if (CHAT_HASH != a) {
-        updateStatus.innerText = "更新があります";
-        location.reload();
-      } else {
-        const v = date2str(new Date());
-        updateStatus.innerText = "✅" + v + ": 更新なし";
-        setTimeout(checkUpdate, 2000);
-      }
-    } catch {
-      updateStatus.innerText = "⛔エラー";
-    }
-  }
-  setTimeout(checkUpdate, 2000);
-});
+// globalThis.addEventListener("load", () => {
+//   const updateStatus = document.getElementById("updateStatus");
+//   async function checkUpdate() {
+//     try {
+//       const a = await (await fetch("chathash.php")).text();
+//       if (CHAT_HASH != a) {
+//         updateStatus.innerText = "更新があります";
+//         location.reload();
+//       } else {
+//         const v = date2str(new Date());
+//         updateStatus.innerText = "✅" + v + ": 更新なし";
+//         setTimeout(checkUpdate, 2000);
+//       }
+//     } catch {
+//       updateStatus.innerText = "⛔エラー";
+//     }
+//   }
+//   setTimeout(checkUpdate, 2000);
+// });

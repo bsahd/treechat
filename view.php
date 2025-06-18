@@ -28,17 +28,23 @@ if (!array_key_exists("name", $_SESSION)) {
         var CHAT_HASH = "<?= hash("sha256", $treetext) ?>"
     </script>
     <script src="view.js"></script>
+    <script src="htmx.js"></script>
 </head>
 
 <body>
+    <div id="loading">
+        <div class="progress-bar" id="dialogspin">
+            <div class="indeterminate"></div>
+        </div>
+    </div>
     <h1>ツリーチャット</h1>
     <p>フォーム[<a href="./">表示</a>|非表示]</p>
     <p><?= $_SESSION["name"] ?> としてログインしています <a href="logout.php">ログアウト</a> <a
             href="passwd.php">パスワード変更</a></p>
     <p id="updateStatus"><?= $nowtime ?>時点の情報です</p>
     <dialog id="fsenddialog">
-        <button
-            onclick="document.getElementById('fsenddialog').close()"><img src="close.png" alt="閉じる"></button>
+        <button onclick="document.getElementById('fsenddialog').close()"><img
+                src="close.png" alt="閉じる"></button>
         <div class="progress-bar" id="dialogspin">
             <div class="indeterminate"></div>
         </div>

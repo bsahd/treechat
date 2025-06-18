@@ -46,7 +46,7 @@ h1, p {
     margin: 0;
     padding: 0;
 }
-h1{
+h1 {
     font-weight: normal;
 }
 ul {
@@ -120,4 +120,18 @@ dialog > .progress-bar {
     animation: none;
     opacity: 0;
     pointer-events: none;
+}
+
+#loading {
+    display: none;
+    opacity: unset;
+}
+#loading.htmx-request {
+    opacity: unset;
+    transition: unset;
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
 }

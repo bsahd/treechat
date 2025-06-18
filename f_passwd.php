@@ -25,7 +25,11 @@ if ($_POST["pass"] == $_POST["pass2"]) {
     }
     fclose($fp);
 } else {
-    http_response_code(503);
+    if ($is_htmx) {
+        http_response_code(200);
+    } else {
+        http_response_code(503);
+    }
     ?>
     <!DOCTYPE html>
     <html lang="en">

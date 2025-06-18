@@ -28,15 +28,21 @@ if (!array_key_exists("name", $_SESSION)) {
         var CHAT_HASH = "<?= hash("sha256", $treetext) ?>"
     </script>
     <script src="index.js"></script>
+    <script src="htmx.js"></script>
 </head>
 
-<body>
+<body hx-boost="true" hx-indicator="#loading">
+    <div id="loading">
+        <div class="progress-bar" id="dialogspin">
+            <div class="indeterminate"></div>
+        </div>
+    </div>
     <h1>ツリーチャット</h1>
     <p>フォーム[表示|<a href="view.php">非表示</a>]</p>
     <p><?= $_SESSION["name"] ?> としてログインしています <a href="logout.php">ログアウト</a> <a
             href="passwd.php">パスワード変更</a></p>
     <p id="updateStatus"><?= $nowtime ?>時点の情報です</p>
-    <dialog id="fsenddialog">
+    <!-- <dialog id="fsenddialog">
         <button
             onclick="document.getElementById('fsenddialog').close()"><img src="close.png" alt="閉じる"></button>
         <div class="progress-bar" id="dialogspin">
@@ -44,7 +50,7 @@ if (!array_key_exists("name", $_SESSION)) {
         </div>
         <iframe src="about:blank" frameborder="0" name="formsend"
             sandbox="allow-scripts"></iframe>
-    </dialog>
+    </dialog> -->
     <?php
     function createChatTree($root)
     {
@@ -64,7 +70,8 @@ if (!array_key_exists("name", $_SESSION)) {
                     <script>
                         document.getElementById("date-<?= $citem["unixtime"] ?>").innerText = date2str(new Date(<?= $citem["unixtime"] * 1000 ?>))
                     </script>
-                    <form action="remove.php" method="post" style="display:inline;">
+                    <form action="remove.php" method="post" style="display:inline;"
+                        hx-boost="true">
                         <input type="hidden" name="id" value="<?= $citem["id"] ?>">
                         <input type="submit" value="削除">
                     </form>

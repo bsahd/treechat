@@ -1,13 +1,22 @@
 <?php
 session_start(['read_and_close' => 1]);
 $style = $_POST["style"] ?? "";
+$is_htmx = isset($_SERVER['HTTP_HX_REQUEST']);
 if (!array_key_exists("name", $_SESSION)) {
-    http_response_code(401);
+    if ($is_htmx) {
+        http_response_code(200);
+    } else {
+        http_response_code(401);
+    }
     header("Location: ./");
     exit;
 }
 if ($_POST["text"] == "") {
-    http_response_code(400);
+    if ($is_htmx) {
+        http_response_code(200);
+    } else {
+        http_response_code(404);
+    }
     ?>
     <!DOCTYPE html>
     <html lang="ja">
@@ -20,6 +29,11 @@ if ($_POST["text"] == "") {
     </head>
 
     <body>
+        <div id="loading">
+            <div class="progress-bar" id="dialogspin">
+                <div class="indeterminate"></div>
+            </div>
+        </div>
         <h1>ツリーチャット:エラー</h1>
         <p>投稿が空です。</p>
         <script>window.parent.postMessage('dialogloaded', '*');</script>
@@ -46,7 +60,11 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
         return $_POST["parent"] == $item["id"];
     }));
     if (!key_exists(0, $parentpost) && $_POST["parent"] != "root") {
-        http_response_code(404);
+        if ($is_htmx) {
+            http_response_code(200);
+        } else {
+            http_response_code(404);
+        }
         ?>
         <!DOCTYPE html>
         <html lang="ja">
@@ -59,6 +77,11 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
         </head>
 
         <body>
+            <div id="loading">
+                <div class="progress-bar" id="dialogspin">
+                    <div class="indeterminate"></div>
+                </div>
+            </div>
             <h1>ツリーチャット:エラー</h1>
             <p>投稿が見つかりません</p>
             <script>window.parent.postMessage('dialogloaded', '*');</script>
