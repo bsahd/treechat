@@ -37,14 +37,7 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
             <h1>ツリーチャット:エラー</h1>
             <p>投稿が見つかりません</p>
             <script>window.parent.postMessage('dialogloaded', '*');</script>
-            <?php
-            if ($style == "dialog") {
-                ?><button type="button"
-                    onclick="window.parent.postMessage('closedialog', '*');">close</button><?php
-            } else {
-                ?><a href="./">戻る</a><?php
-            }
-            ?>
+            <a href="./">戻る</a>
         </body>
 
         </html>
@@ -77,14 +70,7 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
             <h1>ツリーチャット:エラー</h1>
             <p>ユーザーが違うため、削除できません</p>
             <script>window.parent.postMessage('dialogloaded', '*');</script>
-            <?php
-            if ($style == "dialog") {
-                ?><button type="button"
-                    onclick="window.parent.postMessage('closedialog', '*');">close</button><?php
-            } else {
-                ?><a href="./">戻る</a><?php
-            }
-            ?>
+            <a href="./">戻る</a>
         </body>
 
         </html>
@@ -120,14 +106,7 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
             <h1>ツリーチャット:エラー</h1>
             <p>小要素があるため、削除できません</p>
             <script>window.parent.postMessage('dialogloaded', '*');</script>
-            <?php
-            if ($style == "dialog") {
-                ?><button type="button"
-                    onclick="window.parent.postMessage('closedialog', '*');">close</button><?php
-            } else {
-                ?><a href="./">戻る</a><?php
-            }
-            ?>
+            <a href="./">戻る</a>
         </body>
 
         </html>
