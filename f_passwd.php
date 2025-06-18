@@ -1,5 +1,6 @@
 <?php
 session_start(['read_and_close' => 1]);
+$is_htmx = isset($_SERVER['HTTP_HX_REQUEST']);
 if (!array_key_exists("name", $_SESSION)) {
     http_response_code(401);
     ?>
