@@ -42,16 +42,6 @@ if (!array_key_exists("name", $_SESSION)) {
             hx-trigger="load,every 2s"
             hx-indicator="#updateloading"><?= $nowtime ?>時点の情報です</span><span
             id="updateloading">...</span> : <a href="view.php">再読み込み</a></p>
-
-    <dialog id="fsenddialog">
-        <button onclick="document.getElementById('fsenddialog').close()"><img
-                src="close.png" alt="閉じる"></button>
-        <div class="progress-bar" id="dialogspin">
-            <div class="indeterminate"></div>
-        </div>
-        <iframe src="about:blank" frameborder="0" name="formsend"
-            sandbox="allow-scripts"></iframe>
-    </dialog>
     <?php
     function createChatTree($root)
     {
