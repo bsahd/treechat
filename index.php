@@ -1,6 +1,6 @@
 <?php $nowtime = date("Y/m/d H:i:s", $_SERVER['REQUEST_TIME']) . " UTC";
 session_start(['read_and_close' => 1]);
-$noform = isset($_GET["form"]) ? (bool) $_GET["form"] : false;
+$noform = isset($_GET["viewmode"]);
 $fp = fopen("chat.json", "r");
 if (flock($fp, LOCK_SH)) { // 排他ロックを確保します
     $treetext = fread($fp, filesize("chat.json"));
@@ -34,8 +34,7 @@ if (!array_key_exists("name", $_SESSION)) {
             <form hx-get="./" hx-trigger="change from:(.read-write-form input)" hx-target="body"
                 hx-push-url="true" style="display: inline;"
                 class="read-write-form" action="./" method="GET">
-                <label><input type="radio" name="form" value="" <?= $noform ? "" : "checked" ?>>書き込み</label><label><input type="radio"
-                        name="form" value="true" <?= $noform ? "checked" : "" ?>>表示</label>
+                <label><input type="checkbox" name="viewmode" value="true" <?= $noform ? "checked" : "" ?>>表示モード</label>
                 <button id="manual-submit">切り替え</button>
             </form>
         </span>
