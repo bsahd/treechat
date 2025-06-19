@@ -31,7 +31,7 @@ if (!array_key_exists("name", $_SESSION)) {
 <body hx-boost="true" hx-indicator="#loading">
     <header>
         <span>
-            <form hx-get="./" hx-trigger="change from:input" hx-target="body"
+            <form hx-get="./" hx-trigger="change from:(.read-write-form input)" hx-target="body"
                 hx-push-url="true" style="display: inline;"
                 class="read-write-form" action="./" method="GET">
                 <label><input type="radio" name="form" value="" <?= $noform ? "" : "checked" ?>>書き込み</label><label><input type="radio"
