@@ -19,6 +19,7 @@ if ($_POST["pass"] == $_POST["pass2"]) {
         fwrite($fp, json_encode($users, JSON_UNESCAPED_UNICODE));
         fflush($fp);            // 出力をフラッシュしてからロックを解放します
         flock($fp, LOCK_UN);    // ロックを解放します
+        http_response_code(307);
         header("Location: ./logout.php");
     } else {
         echo "ファイルを取得できません!パスワードは変更されていません";
