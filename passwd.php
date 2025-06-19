@@ -33,6 +33,7 @@ session_start(['read_and_close' => 1]);
         </div>
         <input type="submit" value="変更">
     </form>
+    <a href="./">キャンセル</a>
 
 </body>
 
