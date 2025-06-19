@@ -18,7 +18,11 @@ session_start(['read_and_close' => 1]);
         </div>
     </div>
     <h1>ツリーチャット:パスワード変更</h1>
-    <p><?= $_SESSION["name"] ?> としてログインしています <a href="logout.php">ログアウト</a></p>
+    <p><?= $_SESSION["name"] ?> としてログインしています
+    <form style="display: inline;" action="./logout.php" method="POST">
+        <button>ログアウト</button>
+    </form>
+    </p>
 
     <form action="f_passwd.php" method="post">
         <div>
