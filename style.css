@@ -124,16 +124,14 @@ dialog > .progress-bar {
 
 #loading {
     display: none;
-    opacity: unset;
 }
-#loading.htmx-request {
-    opacity: unset;
-    transition: unset;
+#loading.htmx-request, #loading.htmx-uninited {
     display: block;
     position: fixed;
     left: 0;
     top: 0;
     width: 100%;
+    z-index: 9999;
 }
 #updateloading{
     display: none;

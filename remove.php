@@ -29,11 +29,7 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
         </head>
 
         <body>
-            <div id="loading">
-                <div class="progress-bar" id="dialogspin">
-                    <div class="indeterminate"></div>
-                </div>
-            </div>
+            <?php include("loading.html") ?>
             <h1>ツリーチャット:エラー</h1>
             <p>投稿が見つかりません</p>
             <a href="./">戻る</a>
@@ -61,11 +57,7 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
         </head>
 
         <body>
-            <div id="loading">
-                <div class="progress-bar" id="dialogspin">
-                    <div class="indeterminate"></div>
-                </div>
-            </div>
+            <?php include("loading.html") ?>
             <h1>ツリーチャット:エラー</h1>
             <p>ユーザーが違うため、削除できません</p>
             <a href="./">戻る</a>
@@ -96,11 +88,7 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
         </head>
 
         <body>
-            <div id="loading">
-                <div class="progress-bar" id="dialogspin">
-                    <div class="indeterminate"></div>
-                </div>
-            </div>
+            <?php include("loading.html") ?>
             <h1>ツリーチャット:エラー</h1>
             <p>小要素があるため、削除できません</p>
             <a href="./">戻る</a>

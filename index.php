@@ -53,11 +53,7 @@ if (!array_key_exists("name", $_SESSION)) {
             <a href="passwd.php">パスワード変更</a>
         </span>
     </header>
-    <div id="loading">
-        <div class="progress-bar" id="dialogspin">
-            <div class="indeterminate"></div>
-        </div>
-    </div>
+    <?php include("loading.html") ?>
     <h1>ツリーチャット</h1>
 
     <?php

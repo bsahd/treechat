@@ -11,15 +11,17 @@ function date2str(d) {
   });
 }
 function setupDateFormatting() {
-  document.querySelectorAll("[data-unixtime]:not([data-unixtimeprocessed])").forEach(el => {
-    const timestamp = parseInt(el.dataset.unixtime, 10);
-    el.textContent = date2str(new Date(timestamp * 1000));
-    el.dataset["unixtimeprocessed"] = "true"
-    console.log("date formatted for",el)
-  });
+  document.querySelectorAll("[data-unixtime]:not([data-unixtimeprocessed])")
+    .forEach((el) => {
+      const timestamp = parseInt(el.dataset.unixtime, 10);
+      el.textContent = date2str(new Date(timestamp * 1000));
+      el.dataset["unixtimeprocessed"] = "true";
+      console.log("date formatted for", el);
+    });
   const btn = document.getElementById("manual-submit");
   if (btn) btn.style.display = "none";
+  const load = document.getElementById("loading");
+  if (load) load.classList.remove("htmx-uninited");
 }
 
 document.addEventListener("htmx:load", setupDateFormatting);
-

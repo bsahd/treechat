@@ -11,11 +11,7 @@
 </head>
 
 <body hx-boost="true" hx-indicator="#loading">
-    <div id="loading">
-        <div class="progress-bar" id="dialogspin">
-            <div class="indeterminate"></div>
-        </div>
-    </div>
+    <?php include("loading.html") ?>
     <h1>ツリーチャット:ログイン</h1>
     <form action="f_login.php" method="post">
         <div>

@@ -42,11 +42,7 @@ if ($_POST["pass"] == $_POST["pass2"]) {
     </head>
 
     <body>
-        <div id="loading">
-            <div class="progress-bar" id="dialogspin">
-                <div class="indeterminate"></div>
-            </div>
-        </div>
+        <?php include("loading.html") ?>
         <h1>ツリーチャット:変更失敗</h1>
         <a href="./">戻る</a>
     </body>
