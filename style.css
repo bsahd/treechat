@@ -138,6 +138,14 @@ dialog > .progress-bar {
 #updateloading{
     display: none;
 }
+#updateloading.htmx-request+.checkmark{
+    display: none;
+}
 #updateloading.htmx-request{
     display: inline;
+}
+header>span{
+    padding-inline-end: 2px;
+    margin-inline-end: 2px;
+    border-right: 1px solid #000;
 }

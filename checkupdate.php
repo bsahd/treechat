@@ -15,11 +15,8 @@ if ($_GET["hash"] != $hash) {
   <?php
 } else {
   ?>
-  ✅<span
-    id="date-<?= $ctime ?>"><?= date("Y/m/d H:i:s", $ctime) . " UTC" ?></span>:
+  <span id="updateloading">⌛️</span><span class="checkmark">✅</span><span
+    data-unixtime="<?= $ctime ?>"><?= date("Y/m/d H:i:s", $ctime) . " UTC" ?></span>:
   更新なし
-  <script>
-    document.getElementById("date-<?= $ctime ?>").innerText = date2str(new Date(<?= $ctime * 1000 ?>))
-  </script>
   <?php
 }
