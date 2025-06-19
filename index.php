@@ -31,14 +31,11 @@ if (!array_key_exists("name", $_SESSION)) {
 <body hx-boost="true" hx-indicator="#loading">
     <header>
         <span>
-            <form hx-get="./" hx-trigger="change from:select" hx-target="body"
-                hx-push-url="true" style="display: inline;">
-                <select name="form">
-                    <option value="" <?= $noform ? "" : "selected" ?>>書き込み
-                    </option>
-                    <option value="true" <?= $noform ? "selected" : "" ?>>閲覧
-                    </option>
-                </select>
+            <form hx-get="./" hx-trigger="change from:input" hx-target="body"
+                hx-push-url="true" style="display: inline;"
+                class="read-write-form" action="./" method="GET">
+                <label><input type="radio" name="form" value="" <?= $noform ? "" : "checked" ?>>書き込み</label><label><input type="radio"
+                        name="form" value="true" <?= $noform ? "checked" : "" ?>>表示</label>
                 <button id="manual-submit">切り替え</button>
             </form>
         </span>
@@ -49,8 +46,12 @@ if (!array_key_exists("name", $_SESSION)) {
                     class="checkmark">⌚</span><?= $nowtime ?>時点の情報です</span>
             : <a href="./?<?= $_SERVER["QUERY_STRING"] ?>">再読み込み</a></span>
         </span>
-        <span><?= $_SESSION["name"] ?> <a href="logout.php">ログアウト</a> <a
-                href="passwd.php">パスワード変更</a></span>
+        <span><?= $_SESSION["name"] ?>
+            <form style="display: inline;" action="./logout.php" method="POST">
+                <button>ログアウト</button>
+            </form>
+            <a href="passwd.php">パスワード変更</a>
+        </span>
     </header>
     <div id="loading">
         <div class="progress-bar" id="dialogspin">
@@ -76,12 +77,14 @@ if (!array_key_exists("name", $_SESSION)) {
                     <span id="post-<?= $citem["id"] ?>"><?= $citem["name"] ?>:
                         <?= htmlspecialchars($citem["text"]) ?> - <span
                             data-unixtime="<?= $citem["unixtime"] ?>"><?= date("Y/m/d H:i:s", $citem["unixtime"]) . " UTC" ?></span></span>
-                    <form action="remove.php" method="post" style="display:inline;"
-                        hx-boost="true">
-                        <input type="hidden" name="id" value="<?= $citem["id"] ?>">
-                        <input type="submit" value="削除">
-                    </form>
-                    <?php
+                    <?php if (!$noform) { ?>
+                        <form action="remove.php" method="post" style="display:inline;"
+                            hx-boost="true">
+                            <input type="hidden" name="id" value="<?= $citem["id"] ?>">
+                            <input type="submit" value="削除">
+                        </form>
+                        <?php
+                    }
                     createChatTree($citem["id"])
                         ?>
                 </li>

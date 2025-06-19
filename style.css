@@ -100,7 +100,7 @@ dialog > .progress-bar {
     position: absolute;
     width: 30%;
     height: 100%;
-    background-color: #2196f3;
+    background-color: #06f;
     animation: move 1.5s infinite linear;
 }
 
@@ -147,5 +147,14 @@ dialog > .progress-bar {
 header>span{
     padding-inline-end: 2px;
     margin-inline-end: 2px;
-    border-right: 1px solid #000;
+    border-right: 1px solid #444;
+}
+.read-write-form label{
+    border-bottom: 2px solid transparent;
+}
+.read-write-form label input{
+    margin: 0;
+}
+.read-write-form label:has([checked]){
+    border-bottom-color: #06f;
 }
