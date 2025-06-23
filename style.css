@@ -105,13 +105,10 @@ dialog > .progress-bar {
 }
 
 @keyframes move {
-    0% {
+    from {
         left: -30%;
     }
-    50% {
-        left: 50%;
-    }
-    100% {
+    to {
         left: 100%;
     }
 }
