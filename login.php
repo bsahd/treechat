@@ -6,12 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ツリーチャット:ログイン</title>
     <link rel="stylesheet" href="style.css">
-    <script src="index.js" defer></script>
-    <script src="htmx.js" defer></script>
 </head>
 
-<body hx-boost="true" hx-indicator="#loading">
-    <?php include("loading.html") ?>
+<body>
     <h1>ツリーチャット:ログイン</h1>
     <form action="f_login.php" method="post">
         <div>

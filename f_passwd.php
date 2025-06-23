@@ -1,6 +1,5 @@
 <?php
 session_start(['read_and_close' => 1]);
-$is_htmx = isset($_SERVER['HTTP_HX_REQUEST']);
 if (!array_key_exists("name", $_SESSION)) {
     http_response_code(401);
     ?>
@@ -27,11 +26,7 @@ if ($_POST["pass"] == $_POST["pass2"]) {
     }
     fclose($fp);
 } else {
-    if ($is_htmx) {
-        http_response_code(200);
-    } else {
-        http_response_code(503);
-    }
+    http_response_code(503);
     ?>
     <!DOCTYPE html>
     <html lang="en">

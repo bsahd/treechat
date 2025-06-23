@@ -12,7 +12,6 @@ session_start(['read_and_close' => 1]);
 </head>
 
 <body>
-    <?php include("loading.html") ?>
     <h1>ツリーチャット:パスワード変更</h1>
     <p><?= $_SESSION["name"] ?> としてログインしています
     <form style="display: inline;" action="./logout.php" method="POST">

@@ -24,26 +24,31 @@ if (!array_key_exists("name", $_SESSION)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ツリーチャット</title>
     <link rel="stylesheet" href="style.css">
-    <script src="index.js" defer></script>
-    <script src="htmx.js" defer></script>
+    <script src="index.js"></script>
 </head>
 
-<body hx-boost="true" hx-indicator="#loading">
+<body>
     <header>
         <span>
-            <form hx-get="./" hx-trigger="change from:(.read-write-form input)" hx-target="body"
-                hx-push-url="true" style="display: inline;"
-                class="read-write-form" action="./" method="GET">
-                <label><input type="checkbox" name="viewmode" value="true" <?= $noform ? "checked" : "" ?>>表示モード</label>
-                <button id="manual-submit">切り替え</button>
+            <form style="display: inline;" action="./" method="GET"
+                id="viewmodeform">
+                <label><input type="checkbox" name="viewmode" value="true"
+                        <?= $noform ? "checked" : "" ?>>表示モード</label>
+                <button>送信</button>
+                <script>
+                    document.getElementsByName("viewmode")[0].addEventListener("change", (e) => {
+                        document.getElementById("viewmodeform").submit()
+                    })
+                </script>
             </form>
         </span>
-        <span><span
-                hx-get="./checkupdate.php?hash=<?= hash("sha256", $treetext) ?>"
-                hx-trigger="every 2s" hx-indicator="#updateloading"><span
-                    id="updateloading">⌛️</span><span
-                    class="checkmark">⌚</span><?= $nowtime ?>時点の情報です</span>
-            : <a href="./?<?= $_SERVER["QUERY_STRING"] ?>">再読み込み</a></span>
+        <span id="updatecheck">⌚<?= $nowtime ?>時点の情報です</span>
+        <script>
+            setInterval(async () => {
+                document.getElementById("updatecheck").innerHTML = await (await fetch("./checkupdate.php?hash=<?= hash("sha256", $treetext) ?>")).text();
+                setupDateFormatting()
+            }, 2000)
+        </script>
         </span>
         <span><?= $_SESSION["name"] ?>
             <form style="display: inline;" action="./logout.php" method="POST">
@@ -52,7 +57,6 @@ if (!array_key_exists("name", $_SESSION)) {
             <a href="passwd.php">パスワード変更</a>
         </span>
     </header>
-    <?php include("loading.html") ?>
     <h1>ツリーチャット</h1>
 
     <?php

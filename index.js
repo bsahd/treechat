@@ -18,10 +18,6 @@ function setupDateFormatting() {
       el.dataset["unixtimeprocessed"] = "true";
       console.log("date formatted for", el);
     });
-  const btn = document.getElementById("manual-submit");
-  if (btn) btn.style.display = "none";
-  const load = document.getElementById("loading");
-  if (load) load.classList.remove("htmx-uninited");
 }
 
-document.addEventListener("htmx:load", setupDateFormatting);
+window.addEventListener("DOMContentLoaded", setupDateFormatting);

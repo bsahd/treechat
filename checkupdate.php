@@ -15,7 +15,7 @@ if ($_GET["hash"] != $hash) {
   <?php
 } else {
   ?>
-  <span id="updateloading">⌛️</span><span class="checkmark">✅</span><span
+  ✅<span
     data-unixtime="<?= $ctime ?>"><?= date("Y/m/d H:i:s", $ctime) . " UTC" ?></span>:
   更新なし
   <?php

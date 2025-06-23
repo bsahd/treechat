@@ -1,6 +1,5 @@
 <?php
 session_start(['read_and_close' => 1]);
-$is_htmx = isset($_SERVER['HTTP_HX_REQUEST']);
 if (!array_key_exists("name", $_SESSION)) {
     header("Location: ./");
     exit;
@@ -13,11 +12,7 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
         return $_POST["id"] == $item["id"];
     }));
     if (!key_exists(0, $post)) {
-        if ($is_htmx) {
-            http_response_code(200);
-        } else {
-            http_response_code(404);
-        } ?>
+        http_response_code(404); ?>
         <!DOCTYPE html>
         <html lang="ja">
 
@@ -29,7 +24,6 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
         </head>
 
         <body>
-            <?php include("loading.html") ?>
             <h1>ツリーチャット:エラー</h1>
             <p>投稿が見つかりません</p>
             <a href="./">戻る</a>
@@ -40,11 +34,7 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
         exit;
     }
     if ($post[0]["name"] != $_SESSION["name"]) {
-        if ($is_htmx) {
-            http_response_code(200);
-        } else {
-            http_response_code(403);
-        }
+        http_response_code(403);
         ?>
         <!DOCTYPE html>
         <html lang="ja">
@@ -57,7 +47,6 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
         </head>
 
         <body>
-            <?php include("loading.html") ?>
             <h1>ツリーチャット:エラー</h1>
             <p>ユーザーが違うため、削除できません</p>
             <a href="./">戻る</a>
@@ -71,11 +60,7 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
         return $_POST["id"] == $item["parent"];
     });
     if (count($child) != 0) {
-        if ($is_htmx) {
-            http_response_code(200);
-        } else {
-            http_response_code(400);
-        }
+        http_response_code(400);
         ?>
         <!DOCTYPE html>
         <html lang="ja">
@@ -88,7 +73,6 @@ if (flock($fp, LOCK_EX)) {  // 排他ロックを確保します
         </head>
 
         <body>
-            <?php include("loading.html") ?>
             <h1>ツリーチャット:エラー</h1>
             <p>小要素があるため、削除できません</p>
             <a href="./">戻る</a>

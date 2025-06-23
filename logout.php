@@ -1,5 +1,6 @@
 <?php
 if (!($_SERVER['REQUEST_METHOD'] == "POST")) {
+  http_response_code(400)
   ?>
   <!DOCTYPE html>
   <html lang="en">
@@ -11,11 +12,6 @@ if (!($_SERVER['REQUEST_METHOD'] == "POST")) {
   </head>
 
   <body>
-    <div id="loading">
-      <div class="progress-bar" id="dialogspin">
-        <div class="indeterminate"></div>
-      </div>
-    </div>
     <h1>ツリーチャット:ログアウト失敗</h1>
     <p>ログアウトはPOSTメソッドで実行してください</p>
     <a href="./">戻る</a>
