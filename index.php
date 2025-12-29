@@ -34,7 +34,7 @@ if (!array_key_exists("name", $_SESSION)) {
                 id="viewmodeform">
                 <label><input type="checkbox" name="viewmode" value="true"
                         <?= $noform ? "checked" : "" ?>>表示モード</label>
-                <button>送信</button>
+                <button>切替</button>
                 <script>
                     document.getElementsByName("viewmode")[0].addEventListener("change", (e) => {
                         document.getElementById("viewmodeform").submit()
