@@ -23,11 +23,11 @@ session_start(['read_and_close' => 1]);
         <div>
             <label>
                 パスワード
-                <input type="password" name="pass" required autocomplete="off">
+                <input type="password" name="pass" required autocomplete="new-password">
             </label>
             <label>
                 再入力
-                <input type="password" name="pass2" required autocomplete="off">
+                <input type="password" name="pass2" required autocomplete="new-password">
             </label>
         </div>
         <input type="submit" value="変更">

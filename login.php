@@ -14,13 +14,13 @@
         <div>
             <label>
                 ユーザー名
-                <input type="text" name="name" required autocomplete="off">
+                <input type="text" name="name" required autocomplete="username">
             </label>
         </div>
         <div>
             <label>
                 パスワード
-                <input type="password" name="pass" autocomplete="off">
+                <input type="password" name="pass" autocomplete="current-password">
             </label>
         </div>
         <input type="submit" value="ログイン">
